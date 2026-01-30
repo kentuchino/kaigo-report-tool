@@ -17,7 +17,8 @@ else:
     
     # 【ここが重要】利用可能なモデルを自動チェックして一番良いものを選ぶ
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        # 最も広くサポートされている安定版の指定
+model = genai.GenerativeModel('gemini-pro')
         
         # 入力フォーム
         status = st.selectbox("身体状況", ["全介助", "一部介助", "自立"])
