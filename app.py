@@ -57,19 +57,19 @@ else:
 
     # --- 右側：AIの結果表示 ---
     with col_result:
-        st.subheader("🤖 事実のみの報告書（だ・である調）")
+        st.subheader("🤖 分析および報告書案")
         
         if generate_btn:
             if not how and not category:
                 st.warning("状況を入力してください。")
             else:
-                with st.spinner("事実に基づき清書中..."):
+                with st.spinner("情報を精査中..."):
                     try:
                         target_model = available_models[0] if available_models else "models/gemini-1.5-flash"
                         model = genai.GenerativeModel(target_model)
                         
                         prompt = f"""
-                        介護現場の公式な事故報告書を作成せよ。
+                        介護現場の事故報告書の分析および清書を行え。
                         
                         【入力情報】
                         - 種別: {category} / 状態: {status} / 部位・場所: {side}
@@ -77,25 +77,24 @@ else:
                         - 詳細経緯: {how} / 処置・その他: {action}
                         
                         【厳守ルール】
-                        1. 敬語・丁寧語（です・ます）は一切禁止。「だ・である」調で記述せよ。
-                        2. 感情的な表現や余計な修飾語を省き、客観的事実のみを記述せよ。
-                        3. 不足している5W1Hがあれば、最後に「【未確定事項】」として箇条書きで記せ。
-                        4. 医学的断定は避け、「～の可能性がある」「～と推察される」という表現を用いよ。
+                        1. 冒頭で必ず「不足している情報の確認」を行え。5W1Hの観点から欠落している情報をスタッフへ問いかける形式で記せ。
+                        2. 報告書本編は敬語・丁寧語を一切禁止し、「だ・である」調で統一せよ。
+                        3. 客観的事実を簡潔に記し、推測には「～の可能性がある」「～と推察される」を用いよ。
                         
-                        【構成】
-                        ■ 発生状況（時系列に沿った客観的事実）
+                        【出力構成】
+                        ■ 不足情報の確認（5W1H等の視点からスタッフへ確認すべき事項を最優先で記述）
+                        ■ 発生状況（時系列に沿った事実）
                         ■ 実施した処置（バイタル、対応内容）
                         ■ 要因分析（本人・環境・介助の視点）
-                        ■ 再発防止策
-                        ■ 【未確定事項】（不足情報がある場合のみ）
+                        ■ 再発防止策（具体的な提案）
                         """
                         
                         response = model.generate_content(prompt)
                         st.markdown(response.text)
                         st.divider()
-                        st.success("作成された内容をコピーして使用してください。")
+                        st.success("内容を確認し、適宜修正して使用せよ。")
                         
                     except Exception as e:
                         st.error(f"エラーが発生しました: {e}")
         else:
-            st.info("左側のフォームに入力してボタンを押すと、結果が表示されます。")
+            st.info("左側のフォームに入力してボタンを押すと、不足情報の指摘と清書結果が表示される。")
