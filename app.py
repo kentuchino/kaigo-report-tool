@@ -2,8 +2,8 @@ import streamlit as st
 import google.generativeai as genai
 
 # 1. 画面設定（ワイドモード）
-st.set_page_config(page_title="介護報告支援", layout="wide")
-st.title("🛡️ 介護報告書支援ツール")
+st.set_page_config(page_title="介護報告支援　なのはなの家", layout="wide")
+st.title("🛡️ 介護報告書支援ツール　なのはなの家")
 
 # --- セキュリティ・保存に関する明記 ---
 st.warning("⚠️ **【重要】データの保存について**：本アプリに入力された内容やAIの生成結果は、サーバーに保存されません。ページを更新（ブラウザの更新）したり、閉じたりするとすべてのデータが消去されます。必要な内容は必ずコピーして介護ソフト等に貼り付けてください。")
