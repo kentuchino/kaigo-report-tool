@@ -4,7 +4,7 @@ import google.generativeai as genai
 # --- API設定 ---
 # 実際の運用時はStreamlitのSecrets機能に保存するのが安全です
 genai.configure(api_key="AIzaSyBIS0_vhTMcVRDz9MH9D68DKHbKU1hLG9Q")
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('models/gemini-1.5-flash')
 
 # --- 画面レイアウト ---
 st.set_page_config(layout="wide", page_title="介護報告書支援ツール")
