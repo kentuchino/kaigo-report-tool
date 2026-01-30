@@ -30,7 +30,7 @@ else:
         else:
             try:
                 # 段落（インデント）を下げて実行内容を書く
-                model = genai.GenerativeModel('gemini-1.5-flash-latest')
+                model = genai.GenerativeModel('gemini-pro')
                 
                 prompt = f"""
                 あなたは介護施設のリスクマネジメント担当者です。
