@@ -5,6 +5,9 @@ import google.generativeai as genai
 st.set_page_config(page_title="介護報告支援", layout="wide")
 st.title("🛡️ 介護報告書支援ツール")
 
+# --- セキュリティ・保存に関する明記 ---
+st.warning("⚠️ **【重要】データの保存について**：本アプリに入力された内容やAIの生成結果は、サーバーに保存されません。ページを更新（ブラウザの更新）したり、閉じたりするとすべてのデータが消去されます。必要な内容は必ずコピーして介護ソフト等に貼り付けてください。")
+
 # 2. Secretsからキーを取得
 api_key = st.secrets.get("GEMINI_API_KEY")
 
@@ -53,6 +56,8 @@ else:
             how = st.text_area("具体的な経緯・原因の推測", placeholder="例：目を離した隙に立ち上がろうとして尻もちをついた", height=100)
             action = st.text_area("バイタル・処置・報告", placeholder="例：BP130/80、意識清明。冷罨法実施。看護師・家族報告済み", height=100)
 
+        # 生成ボタン
+        st.caption("※ボタンを押すとAIが分析を開始します。入力内容は一時的なものです。")
         generate_btn = st.button("報告書を生成・分析する", use_container_width=True, type="primary")
 
     # --- 右側：AIの結果表示 ---
@@ -92,7 +97,7 @@ else:
                         response = model.generate_content(prompt)
                         st.markdown(response.text)
                         st.divider()
-                        st.success("内容を確認し、適宜修正して使用せよ。")
+                        st.success("【確認】内容は保存されません。速やかにコピーして介護ソフト等へ貼り付けてください。")
                         
                     except Exception as e:
                         st.error(f"エラーが発生しました: {e}")
