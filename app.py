@@ -3,7 +3,7 @@ import google.generativeai as genai
 
 # --- API設定 ---
 # 実際の運用時はStreamlitのSecrets機能に保存するのが安全です
-genai.configure(api_key="AIzaSyBIS0_vhTMcVRDz9MH9D68DKHbKU1hLG9Q")
+genai.configure(api_key="AIzaSyD8OK3EgAdBn86Wed1YoIy2een57kd9nso")
 model = genai.GenerativeModel('models/gemini-1.5-flash')
 
 # --- 画面レイアウト ---
