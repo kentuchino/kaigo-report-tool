@@ -10,7 +10,7 @@ api_key = st.secrets.get("GEMINI_API_KEY")
 
 if api_key:
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    model = genai.GenerativeModel('models/gemini-1.0-pro')
 else:
     st.error("APIキーが設定されていません。Manage appのSecretsで設定してください。")
 
