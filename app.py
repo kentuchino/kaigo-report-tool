@@ -2,9 +2,17 @@ import streamlit as st
 import google.generativeai as genai
 
 # --- API設定 ---
-# 実際の運用時はStreamlitのSecrets機能に保存するのが安全です
-genai.configure(api_key="AIzaSyD8OK3EgAdBn86Wed1YoIy2een57kd9nso")
-model = genai.GenerativeModel('models/gemini-1.5-flash')
+# コードに直接書かず、Streamlitの隠し設定から読み込むようにします
+import os
+
+# もし設定（Secrets）にキーがあればそれを使う、なければ空にする
+api_key = st.secrets.get("GEMINI_API_KEY")
+
+if api_key:
+    genai.configure(api_key=api_key)
+    model = genai.GenerativeModel('gemini-1.5-flash')
+else:
+    st.error("APIキーが設定されていません。Manage appのSecretsで設定してください。")
 
 # --- 画面レイアウト ---
 st.set_page_config(layout="wide", page_title="介護報告書支援ツール")
